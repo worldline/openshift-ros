@@ -1,0 +1,36 @@
+Name: ubuntu
+Cartridge-Short-Name: UBUNTU
+Architecture: noarch
+Display-Name: UBUNTU 
+Description: "Ubuntu"
+Version: '0.1.0'
+Versions: [0.1.0]
+Cartridge-Version: 0.1.0
+Cartridge-Vendor: worldline
+License: MIT License
+Vendor: Mit
+Categories:
+  - embedded
+  - application
+  - web_framework
+Website: http://proot.me/
+Provides:
+  - postgis
+Scaling:
+  Min: 1
+  Max: -1
+Publishes:
+  get-internal-uri:
+    Type: "NET_TCP:http"
+Endpoints:
+  - Private-IP-Name:   IP
+    Private-Port-Name: BRIDGE_HTTP
+    Private-Port:      10140
+    Public-Port-Name:  WEB_PROXY_PORT
+    Mappings:
+      - Frontend: ""
+        Options: {"websocket":true}
+  - Private-IP-Name:   IP
+    Private-Port-Name: ROS_PORT
+    Private-Port: 10139
+    Public-Port-Name:  WEB_PROXY_PORT

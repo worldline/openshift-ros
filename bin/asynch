@@ -1,0 +1,64 @@
+#!/bin/bash
+# The logic to start up your application should be put in this
+# script. The application will work only if it binds to
+# $OPENSHIFT_INTERNAL_IP:8080
+
+PROOT="proot";
+PROOT_CMD_LINE="./proot -r ubuntu -b /dev -b /etc/resolv.conf -b /proc" 
+PROOT_CMD_LINE_ROOT="$PROOT_CMD_LINE  -0" 
+
+
+if mkdir mylock; then
+
+rm -rf $PROOT;
+wget https://github.com/maxired/proot-static-build/raw/master/static/proot
+chmod +x $PROOT
+rm -rf ubuntu/*;
+mkdir ubuntu;
+echo "./proot -r ubuntu -0 -b /dev -b /etc/resolv.conf -b /proc bash" >> ubuntu.sh
+chmod +x ubuntu.sh
+cd ubuntu;
+wget http://infos-sfenix.apps.zone52.org/ubuntu-12.04-x86_64.tar.gz
+tar xzf ubuntu-12.04-x86_64.tar.gz
+echo "source /etc/environment" >> etc/bash.bashrc
+echo "source /opt/ros/hydro/setup.bash" >> etc/bash.bashrc
+echo "source devel/setup.bash" >> etc/bash.bashrc
+echo 'export PATH=/sbin:$PATH' >> etc/bash.bashrc
+echo "export HOME=/root" >> etc/bash.bashrc
+echo 'export ROS_MASTER_URI="http://${OPENSHIFT_UBUNTU_IP}:${OPENSHIFT_UBUNTU_ROS_PORT}"' >> etc/bash.bashrc
+echo 'export ROS_IP=${OPENSHIFT_UBUNTU_IP}' >> etc/bash.bashrc
+echo "export LC_ALL=C" >> etc/bash.bashrc
+rm -rf ubuntu-12.04-x86_64.tar.gz
+mkdir -p root/catkin_ws/src
+
+rm -rf install.sh
+echo "export PATH=/sbin:$PATH" >> install.sh
+echo "apt-get -y update" >> install.sh 
+echo "apt-get -y install build-essential" >> install.sh
+echo "echo 'deb http://packages.ros.org/ros/ubuntu precise main' > /etc/apt/sources.list.d/ros-latest.list" >> install.sh 
+echo "wget http://packages.ros.org/ros.key -O - | apt-key add -" >> install.sh 
+echo "apt-get -y update" >> install.sh 
+echo "apt-get -y install ros-hydro-ros-base" >> install.sh 
+echo "apt-get -y install git"  >> install.sh
+echo "rosdep init; rosdep update" >> install.sh 
+echo "cd /root/catkin_ws/" >> install.sh 
+echo "cd src" >> install.sh
+echo "git clone https://github.com/steffel/rosbridge_suite rosbridge & git clone https://github.com/WPI-RAIL/rosauth rosauth" >> install.sh 
+echo "cd /root/catkin_ws/" >> install.sh
+echo ". /opt/ros/hydro/setup.sh" >> install.sh 
+echo "catkin_make >> /var/log/install.log" >> install.sh 
+echo "cd /opt/ros/hydro/lib/python2.7/dist-packages/rosgraph/" >> install.sh
+echo "rm network.py" >> install.sh
+echo "wget https://gist.github.com/steffel/7446537/raw/9f00681b7dacbdbd96a2e7feb2944b286c8c9884/network.py" >> install.sh
+echo "cd /root/catkin_ws/" >> install.sh
+echo 'export ROS_MASTER_URI=http://$OPENSHIFT_UBUNTU_IP:$OPENSHIFT_UBUNTU_ROS_PORT' >> install.sh
+echo 'export ROS_IP=$OPENSHIFT_UBUNTU_IP' >> install.sh
+echo "roscore -p $OPENSHIFT_UBUNTU_ROS_PORT &" >> install.sh
+echo "sleep 15" >> install.sh
+echo ". devel/setup.sh" >> install.sh
+echo "roslaunch rosbridge_server rosbridge_websocket.launch port:=$OPENSHIFT_UBUNTU_BRIDGE_HTTP address:=$OPENSHIFT_UBUNTU_IP" >> install.sh
+chmod +x install.sh
+cd ..
+$PROOT_CMD_LINE_ROOT /install.sh
+
+fi
