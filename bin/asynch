@@ -42,7 +42,7 @@ echo "apt-get -y install ros-hydro-ros-base" >> install.sh
 echo "apt-get -y install git"  >> install.sh
 echo "apt-get -y install aptitude"  >> install.sh
 echo "rosdep init; rosdep update" >> install.sh 
-echo "apt-get -y install ros-hydro-pocketsphinx gtreamer0.10-pocketsphinx ros-hydro-audio-common libasound2" >> install.sh 
+echo "apt-get -y install gstreamer-tools ros-hydro-pocketsphinx gtreamer0.10-pocketsphinx ros-hydro-audio-common libasound2" >> install.sh 
 echo "cd /root/catkin_ws/" >> install.sh 
 echo "cd src" >> install.sh
 echo "git clone https://github.com/steffel/rosbridge_suite rosbridge & git clone https://github.com/WPI-RAIL/rosauth rosauth" >> install.sh 
