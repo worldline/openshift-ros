@@ -40,10 +40,9 @@ echo "wget http://packages.ros.org/ros.key -O - | apt-key add -" >> install.sh
 echo "apt-get -y update" >> install.sh 
 echo "apt-get -y install ros-hydro-ros-base" >> install.sh 
 echo "apt-get -y install git"  >> install.sh
-echo "apt-get -y install gstreamer0.10-ffmpeg gstreamer0.10-fluendo-mp3 gstreamer0.10-pitfdll gstreamer0.10-sdl gstreamer0.10-plugins-ugly gstreamer0.10-plugins-ugly-multiverse gstreamer0.10-plugins-bad gstreamer0.10-plugins-bad-multiverse mpg321"  >> install.sh
-echo "mkdir -p /lib/modules/2.6.32-358.14.1.el6.x86_64/build" >> install.sh
-echo "ls -i /usr/src/kernels/2.6.32-358.23.2.el6.x86_64/ /lib/modules/2.6.32-358.14.1.el6.x86_64/build" >> install.sh
+echo "apt-get -y install aptitude"  >> install.sh
 echo "rosdep init; rosdep update" >> install.sh 
+echo "apt-get -y install ros-hydro-pocketsphinx" >> install.sh 
 echo "cd /root/catkin_ws/" >> install.sh 
 echo "cd src" >> install.sh
 echo "git clone https://github.com/steffel/rosbridge_suite rosbridge & git clone https://github.com/WPI-RAIL/rosauth rosauth" >> install.sh 
