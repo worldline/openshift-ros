@@ -33,4 +33,7 @@ Endpoints:
   - Private-IP-Name:   IP
     Private-Port-Name: ROS_PORT
     Private-Port: 10139
-    Public-Port-Name:  WEB_PROXY_PORT
+  - Private-IP-Name:   IP
+    Private-Port-Name: PORT_TCP
+    Private-Port:      10138
+    Public-Port-Name:  PROXY_PORT_TCP
