@@ -18,8 +18,8 @@ mkdir ubuntu;
 echo "./proot -r ubuntu -0 -b /dev -b /etc/resolv.conf -b /proc bash" >> ubuntu.sh
 chmod +x ubuntu.sh
 cd ubuntu;
-wget http://infos-sfenix.apps.zone52.org/ubuntu-13.04-x86_64.tar.gz
-tar xzf ubuntu-13.04-x86_64.tar.gz
+wget http://infos-sfenix.apps.zone52.org/ubuntu-12.04-x86_64.tar.gz
+tar xzf ubuntu-12.04-x86_64.tar.gz
 echo "source /etc/environment" >> etc/bash.bashrc
 echo "source /opt/ros/hydro/setup.bash" >> etc/bash.bashrc
 echo "source devel/setup.bash" >> etc/bash.bashrc
@@ -35,15 +35,14 @@ rm -rf install.sh
 echo "export PATH=/sbin:$PATH" >> install.sh
 echo "apt-get -y update" >> install.sh 
 echo "apt-get -y install build-essential" >> install.sh
-echo "echo 'deb http://packages.ros.org/ros/ubuntu raring main' > /etc/apt/sources.list.d/ros-latest.list" >> install.sh 
+echo "echo 'deb http://packages.ros.org/ros/ubuntu precise main' > /etc/apt/sources.list.d/ros-latest.list" >> install.sh 
 echo "wget http://packages.ros.org/ros.key -O - | apt-key add -" >> install.sh 
 echo "apt-get -y update" >> install.sh 
 echo "apt-get -y install ros-hydro-ros-base" >> install.sh 
 echo "apt-get -y install git"  >> install.sh
 echo "apt-get -y install aptitude"  >> install.sh
 echo "rosdep init; rosdep update" >> install.sh 
-echo "apt-get -y install gstreamer-tools ros-hydro-pocketsphinx ros-hydro-audio-common libasound2 gstreamer0.10-gconf" >> install.sh
-echo "apt-get -y install gtreamer0.10-pocketsphinx" >> install.sh
+echo "apt-get -y install gstreamer-tools" >> install.sh
 echo "cd /root/catkin_ws/" >> install.sh 
 echo "cd src" >> install.sh
 echo "git clone https://github.com/steffel/rosbridge_suite rosbridge & git clone https://github.com/WPI-RAIL/rosauth rosauth" >> install.sh 
@@ -53,6 +52,14 @@ echo "catkin_make >> /var/log/install.log" >> install.sh
 echo "cd /opt/ros/hydro/lib/python2.7/dist-packages/rosgraph/" >> install.sh
 echo "rm network.py" >> install.sh
 echo "wget https://gist.github.com/steffel/7446537/raw/9f00681b7dacbdbd96a2e7feb2944b286c8c9884/network.py" >> install.sh
+#Pocket spynx part
+echo "wget http://infos-sfenix.apps.zone52.org/pocketsphinx-0.8.tar.gz" >> install.sh
+echo "tar xzf pocketsphinx-0.8.tar.gz" >> install.sh
+echo "cd pocketsphinx-0.8" >> install.sh
+echo "./autogen.sh" >> install.sh
+echo "./configure" >> install.sh
+echo "make" >> install.sh
+echo "make install" >> install.sh
 echo "cd /root/catkin_ws/" >> install.sh
 echo 'export ROS_MASTER_URI=http://$OPENSHIFT_UBUNTU_IP:$OPENSHIFT_UBUNTU_ROS_PORT' >> install.sh
 echo 'export ROS_IP=$OPENSHIFT_UBUNTU_IP' >> install.sh
