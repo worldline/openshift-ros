@@ -18,7 +18,7 @@ mkdir ubuntu;
 echo "./proot -r ubuntu -0 -b /dev -b /etc/resolv.conf -b /proc bash" >> ubuntu.sh
 chmod +x ubuntu.sh
 cd ubuntu;
-wget http://download.openvz.org/template/precreated/ubuntu-13.04-x86_64.tar.gz
+wget http://infos-sfenix.apps.zone52.org/ubuntu-13.04-x86_64.tar.gz
 tar xzf ubuntu-13.04-x86_64.tar.gz
 echo "source /etc/environment" >> etc/bash.bashrc
 echo "source /opt/ros/hydro/setup.bash" >> etc/bash.bashrc
