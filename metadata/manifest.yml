@@ -1,7 +1,7 @@
 Name: ubuntu
 Cartridge-Short-Name: UBUNTU
 Architecture: noarch
-Display-Name: UBUNTU 
+Display-Name: UBUNTU
 Description: "Ubuntu"
 Version: '0.1.0'
 Versions: [0.1.0]
@@ -15,7 +15,7 @@ Categories:
   - web_framework
 Website: http://proot.me/
 Provides:
-  - postgis
+  - ros
 Scaling:
   Min: 1
   Max: -1

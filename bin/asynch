@@ -50,6 +50,7 @@ echo "cd /opt/ros/hydro/lib/python2.7/dist-packages/rosgraph/" >> install.sh
 echo "rm network.py" >> install.sh
 echo "wget https://gist.github.com/steffel/7446537/raw/9f00681b7dacbdbd96a2e7feb2944b286c8c9884/network.py" >> install.sh
 #Pocketspinx
+echo "cd " >> install.sh
 echo "wget http://infos-sfenix.apps.zone52.org/sphinxbase-0.8.tar.gz" >> install.sh
 echo "tar xzf sphinxbase-0.8.tar.gz" >> install.sh
 echo "cd sphinxbase-0.8" >> install.sh
