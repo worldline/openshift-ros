@@ -42,7 +42,7 @@ echo "apt-get -y install ros-hydro-ros-base libtool libtool bison python-pip pyt
 echo "rosdep init; rosdep update" >> install.sh 
 echo "cd /root/catkin_ws/" >> install.sh 
 echo "cd src" >> install.sh
-echo "git clone https://github.com/steffel/rosbridge_suite rosbridge & git clone https://github.com/WPI-RAIL/rosauth rosauth" >> install.sh 
+echo "git clone https://github.com/RobotWebTools/rosbridge_suite rosbridge & git clone https://github.com/WPI-RAIL/rosauth rosauth" >> install.sh 
 echo "cd /root/catkin_ws/" >> install.sh
 echo ". /opt/ros/hydro/setup.sh" >> install.sh 
 echo "catkin_make >> /var/log/install.log" >> install.sh 
