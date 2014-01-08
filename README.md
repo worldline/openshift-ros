@@ -1,5 +1,9 @@
 openshift-ros
 ==========================
+
+In OpenShift, choose a downloaded cartridge, with the following URL :
+http://cartreflect-claytondev.rhcloud.com/reflect?github=worldline/openshift-ros
+
 This cartridge uses Proot to run ubuntu in order to install ROS and ROSBridge. 
 
 You have too wait during the install. 
